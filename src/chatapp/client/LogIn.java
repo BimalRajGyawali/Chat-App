@@ -60,7 +60,7 @@ private JButton getChatButton() {
 			DataOutputStream out;
 			DataInputStream in;
 			Socket clientSocket;
-			int port = 6007;
+			int port = 6006;
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String username = userTextField.getText();
