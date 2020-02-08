@@ -1,9 +1,8 @@
-package chatapp.client;
+package chatapp.client.view;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -15,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class LogIn extends JFrame{
+public class LogInFrame extends JFrame{
    /**
 	 * 
 	 */
@@ -25,7 +24,7 @@ public class LogIn extends JFrame{
    private JLabel textLabel;
    private JPanel panel;
    
-   public LogIn(){
+   public LogInFrame(){
 	   setResizable(false);
 	   setBounds(100,200,400,300);
 	   userTextField = getUserTextField();
@@ -58,9 +57,8 @@ private JButton getChatButton() {
 		
 		chatButton.addActionListener(new ActionListener() {
 			DataOutputStream out;
-			DataInputStream in;
 			Socket clientSocket;
-			int port = 6006;
+			int port = 6085;
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String username = userTextField.getText();
@@ -71,12 +69,8 @@ private JButton getChatButton() {
 				try {
 					clientSocket = new Socket("localhost",port);
 					out = new DataOutputStream(clientSocket.getOutputStream());
-					in = new DataInputStream(clientSocket.getInputStream());
 					out.writeUTF(username);
-					
-					String name = in.readUTF();
-					JOptionPane.showMessageDialog(null, name);
-					
+					setVisible(false);
 					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

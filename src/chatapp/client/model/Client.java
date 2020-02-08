@@ -1,4 +1,4 @@
-package chatapp.client;
+package chatapp.client.model;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

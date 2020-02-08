@@ -1,10 +1,10 @@
 package chatapp.main;
 
-import chatapp.client.LogIn;
+import chatapp.client.view.LogInFrame;
 
 public class ClientMain {
 	public static void main(String[] args) {
-		LogIn logIn = new LogIn();
+		LogInFrame logIn = new LogInFrame();
 		logIn.setVisible(true);
 	}
 

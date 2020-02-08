@@ -1,17 +1,24 @@
 package chatapp.handler;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import chatapp.client.Client;
+import chatapp.client.model.Client;
+import chatapp.client.view.MessageFrame;
 import chatapp.server.Server;
 
 public class ClientHandler extends Thread{
       private Server server;
       private Client client;
+      private static List<MessageFrame> messageFrames = new ArrayList<MessageFrame>();
       
       public ClientHandler(Server server, Client client) {
          this.server = server;
          this.client = client;
+      }
+      
+      public List<MessageFrame> getMessageFrames(){
+    	  return messageFrames;
       }
 
 	public Server getServer() {
@@ -29,16 +36,25 @@ public class ClientHandler extends Thread{
 	public void setClient(Client client) {
 		this.client = client;
 	}
-      
+        
 	@Override
 	public void run() {
-		try {
-			client.getOutputStream().writeUTF(client.getUsername());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	
+       MessageFrame messageFrame = new MessageFrame(messageFrames,client,server);
+       
+       List<ClientHandler> handlers = server.getHandlers();
+       
+       for(ClientHandler handler : handlers) {
+    	   if(handler != this) {
+    		   messageFrame.addLabel(handler.getClient().getUsername()+" is online");
+    	   }
+       }
+       
+       for(MessageFrame frame : messageFrames) {
+    	   frame.addLabel(client.getUsername()+" is online");
+    	   frame.revalidate();
+    	   frame.repaint();
+       }
+       messageFrames.add(messageFrame);
+     }
+
 }

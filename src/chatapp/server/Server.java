@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import chatapp.client.Client;
+import chatapp.client.model.Client;
 import chatapp.handler.ClientHandler;
 
 public class Server {
