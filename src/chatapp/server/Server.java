@@ -39,6 +39,7 @@ public class Server {
     				String username = in.readUTF();
     				Client client = new Client(username, clientSocket, in, out);
     				ClientHandler handler = new ClientHandler(this, client);
+    				client.setHandler(handler);
     				handlers.add(handler);
     				handler.start();
     				

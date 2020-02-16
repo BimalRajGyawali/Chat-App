@@ -46,11 +46,15 @@ public class ClientHandler extends Thread{
        for(ClientHandler handler : handlers) {
     	   if(handler != this) {
     		   messageFrame.addLabel(handler.getClient().getUsername()+" is online");
-    	   }
+    		   messageFrame.addToOnlineList(handler.getClient().getUsername());
+    	   }else {
+    		   messageFrame.addToOnlineList("You");
+    		  }
        }
        
        for(MessageFrame frame : messageFrames) {
     	   frame.addLabel(client.getUsername()+" is online");
+    	   frame.addToOnlineList(client.getUsername());
     	   frame.revalidate();
     	   frame.repaint();
        }
